@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Autocomplete</title>
+    <style type="text/css" media="screen">
+      li {border: solid 1px;}
+      body {font-family: sans-serif; font-size: 12px;}
+      #ac_suggestion_box {max-height: 180px; width: 200px; border: solid 1px; overflow: auto; position: absolute; display: none;}
+      #ac_suggestion_box p {margin: 0px; padding: 4 2 2 3; cursor: pointer;}
+      .ac_even {background-color: #ddd;}
+      .ac_selected {background-color: #009; color: #fff;}
+    </style>
+    <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="jquery.autocomplete.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(function() {
+        ramps = [
+'Aguascalientes UPCS', 'Albany', 'Albuquerque', 'Amarillo', 'Arcadia', 'Atlanta', 'Auburn', 'Austell', 'Ayer', 'Baltimore', 'Barbours Cut', 'Bethlehem', 'Billings', 'Birmingham', 'Boston', 'Buffalo', 'Cadereyta Jimenez UPCS', 'Calgary', 'Celaya UPCS', 'Chambersburg', 'Charleston', 'Charlotte', 'Chicago City', 'Chicago North', 'Chicago South', 'Cincinnati', 'City of Industry', 'Ciudad Obregon UPCS', 'Cleveland', 'Columbus', 'Culiacan UPCS', 'DIT', 'Dallas', 'Denver', 'Detroit', 'Edmonton', 'El Paso', 'Evansville', 'Fairburn', 'Fort Lauderdale', 'Fort Worth', 'Fresno', 'Georgetown', 'Global Gateway South', 'Greensboro', 'Greenville', 'Guadalajara UPCS', 'Guaymas UPCS', 'Half COI + Half Harbor', 'Half COI + Half ICTF', 'Half ICTF + Half Harbor', 'Half LA + Half Harbor', 'Half LA + Half ICTF', 'Halifax', 'Harbor', 'Harrisburg', 'Harvard', 'Hermosillo UPCS', 'Hermosillo', 'Houston', 'Huntsville', 'ICTF', 'Indianapolis', 'Jackson', 'Jacksonville', 'Joliet', 'Kansas City', 'Laredo KCS', 'Laredo', 'Las Vegas', 'Lathrop', 'Leon UPCS', 'Los Angeles', 'Los Mochis UPCS', 'Louisville', 'Marion', 'Memphis', 'Mexico City UPCS', 'Miami', 'Minneapolis', 'Mobile', 'Moncton', 'Monterrey UPCS', 'Monterrey', 'Montreal', 'Morrisville', 'Nashville', 'Navojoa UPCS', 'Navojoa', 'New Orleans', 'Newark', 'Newton', 'Nogales UPCS', 'Nogales', 'Norfolk', 'North Port', 'Oakland', 'Omaha', 'Orlando', 'Pantaco KCSM', 'Pantaco', 'Philadelphia', 'Phoenix', 'Pittsburgh', 'Portland', 'Puebla UPCS', 'Queretaro UPCS', 'Queretaro', 'Randolph', 'Regina', 'Reno', 'Rochelle', 'Rutherford', 'Saint Louis', 'Salt Lake City', 'Saltillo UPCS', 'San Antonio', 'San Bernardino', 'San Diego', 'San Luis Potosi UPCS', 'San Luis Potosi', 'Santa Ana UPCS', 'Santa Ana', 'Saskatoon', 'Savannah', 'Seattle', 'Shreveport', 'South Port', 'Spokane', 'Springfield', 'Stockton', 'Syracuse', 'Tacoma', 'Tampa', 'Tampico', 'Taylor', 'Titusville', 'Toledo', 'Toluca UPCS', 'Toluca', 'Toronto', 'Torreon UPCS', 'Tucson', 'Vancouver', 'West Palm Beach', 'Winnipeg', 'Worcester'
+        ];
+        $(".autocomplete").autocomplete();
+        vendors = [
+'BNSF', 'CN', 'CP', 'CSX', 'City Haul', 'ESI', 'Hammer', 'Hanjin', 'Hub', 'K-Line', 'KCS', 'Lone Star', 'Maersk', 'Morgan Southern', 'NS', 'NYK', 'Nationwide Transport', 'Pacer', 'RDT', 'Roadlink East', 'Roadlink Midwest', 'Roadlink New England', 'Roadlink Pacific', 'Roadlink South', 'TriState', 'UP'
+        ];
+      });
+    </script>
+  </head>
+  <body id="main">
+    <label for="ramp">Ramp</label><input type="text" name="ramp" id="ramp" class="autocomplete" list="ramps">
+    <label for="vendor">Vendor</label><input type="text" name="vendor" id="vendor" class="autocomplete" list="vendors">
+  </body>
+</html>

@@ -1,0 +1,5 @@
+move highlighted down when down is pressed
+move highlighted up when up is pressed
+remove div on blur
+remove div and replace the text when enter is pressed
+remove div and replace the text when a p is clicked
