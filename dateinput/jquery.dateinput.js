@@ -1,7 +1,31 @@
+var jqdi = {
+  picker: "jqdi-datepicker",
+  picker_id: "#jqdi-datepicker",
+  timeout: function() {
+    if (jqdi.hide) $(jqdi.picker_id).hide();
+  },
+  hide: true,
+  current_input: ""
+};
+
 (function($) {
+  $(function() {
+    $("body").append("<div id='"+jqdi.picker+"' style='position: absolute;'></div>");
+  });
+  
   $.fn.dateinput = function(options) {
     var settings = $.extend({
-      replaceAllText: false
+      replaceAllText: false, 
+      datepicker: {
+        dateFormat: 'yy-mm-dd',
+        onSelect: function(dateTxt, input) {
+          var match = jqdi.current_input.val().match(/(>=|<=|>|<|=|not|like)\s*/);
+          var val = "";
+          if (match) val = $.trim(match[0]) + " ";
+          jqdi.current_input.val(val + dateTxt);
+          $(this).hide();
+        }
+      }
     }, options || {});
     
     // adapted from http://en.wikipedia.org/wiki/Leap_year
@@ -25,6 +49,16 @@
       };
     };
     
+    var activate_datepicker = function(input) {
+      jqdi.current_input = $(input);
+      var pos = jqdi.current_input.show().position();
+      $(jqdi.picker_id).css({"left": pos.left, "top": pos.top + jqdi.current_input.outerHeight(true)}).show();
+    };
+    
+    $(jqdi.picker_id).datepicker(settings.datepicker).mouseover(function() {
+      jqdi.hide = false;
+    }).hide();
+    
     return this.each(function() {
       var self = $(this);
       self.blur(function() {
@@ -37,8 +71,15 @@
             self.val(txt.replace(re, iso));            
           };
         };
+        jqdi.hide = true;
+        setTimeout('jqdi.timeout()', 500);
+      }).focus(function () {
+        jqdi.hide = false;
+      }).click(function() {
+        activate_datepicker(this);
+      }).keydown(function(e) {
+        if (e.keyCode == 40) activate_datepicker(this);
       });
-      
     });
   };
 })(jQuery);
