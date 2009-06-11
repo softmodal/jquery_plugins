@@ -10,7 +10,7 @@ var jqdi = {
 
 (function($) {
   $(function() {
-    $("body").append("<div id='"+jqdi.picker+"' style='position: absolute;'></div>");
+    $("body").append("<div id='"+jqdi.picker+"' style='position: absolute; z-index: 1000000;'></div>");
   });
   
   $.fn.dateinput = function(options) {
@@ -22,7 +22,7 @@ var jqdi = {
           var match = jqdi.current_input.val().match(/(>=|<=|>|<|=|not|like)\s*/);
           var val = "";
           if (match) val = $.trim(match[0]) + " ";
-          jqdi.current_input.val(val + dateTxt);
+          jqdi.current_input.val(val + dateTxt).focus();
           $(this).hide();
         }
       }
@@ -51,8 +51,10 @@ var jqdi = {
     
     var activate_datepicker = function(input) {
       jqdi.current_input = $(input);
-      var pos = jqdi.current_input.show().position();
-      $(jqdi.picker_id).css({"left": pos.left, "top": pos.top + jqdi.current_input.outerHeight(true)}).show();
+      $(jqdi.picker_id).css({
+        "top":  jqdi.current_input.offset().top + jqdi.current_input.height() + 8,
+        "left": jqdi.current_input.offset().left
+      }).show();
     };
     
     $(jqdi.picker_id).datepicker(settings.datepicker).mouseover(function() {
