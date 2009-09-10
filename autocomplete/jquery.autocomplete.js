@@ -1,14 +1,14 @@
-(function($){
-  $("body").append("<div id='ac_suggestion_box'></div>");
+(function($) {
+  $(function() { $("body").append("<div id='ac_suggestion_box'></div>") });
+  var ac_current_input = {};
   $.fn.autocomplete = function(options) {
     var defaults = {};
     var options = $.extend(defaults, options);
   
     var suggestion_box = $("#ac_suggestion_box");
-    var selected_class = "ac_selected";
+    var selected_class = "ui-state-highlight";
     var tag_type = "p";
     var selected_entry_name = tag_type + "." + selected_class;
-    var current_input = {};
   
     var insert_wildcards = function(text) {
       //make it match space or period between letters
@@ -50,10 +50,11 @@
       };
     }).mousedown(function(e) {
       if ($(e.target).attr("tagName").toLowerCase() == tag_type) {
-        current_input.val($(selected_entry_name).html());
-        clear_suggestion_box();
+        ac_current_input.val($(selected_entry_name).html());
         return false;
       };
+    }).mouseup(function() {
+      clear_suggestion_box();
     });
 
     return this.each(function() {
@@ -113,7 +114,7 @@
         clear_suggestion_box();
       }).focus(function(e) {
         self.list = eval(self.attr("list"));
-        current_input = self;
+        ac_current_input = self;
       });
       self.focus();
     });
